@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For Habiba Kashmiri 💖</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', 'Poppins', sans-serif;
+      overflow: hidden;
+      background: #f3f4f6;
+    }
+
+    .page {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px;
+      color: #fff;
+      animation: fade 1.2s ease;
+    }
+
+    .page.active { display: flex; }
+
+    @keyframes fade { from {opacity:0; transform:scale(0.98);} to {opacity:1; transform:scale(1);} }
+
+    .card {
+      background: rgba(0,0,0,0.5);
+      padding: 50px;
+      border-radius: 25px;
+      max-width: 900px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      font-size: 44px;
+      line-height: 1.4;
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 24px;
+      line-height: 1.7;
+      margin-top: 20px;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 15px 35px;
+      font-size: 20px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .yes { background: linear-gradient(135deg,#ff6a00,#ee0979,#f7971e); color: white; }
+    .no { background: #aaa; position: absolute; color: #222; }
+
+    /* Multicolor animated background */
+    .bg {
+      background: linear-gradient(270deg, #ff6a00, #ee0979, #f7971e, #1fa2ff, #43cea2, #ff6a00);
+      background-size: 1200% 1200%;
+      animation: gradientBG 20s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+
+    /* Gift Box */
+    .gift {
+      width: 80px; height: 80px; background: #ff4757; border-radius: 12px; position: relative; margin-top: 30px; cursor: pointer; animation: bounce 1s infinite alternate;
+    }
+    .gift::before {
+      content: ""; width: 10px; height: 80px; background: #f1c40f; position: absolute; left: 35px; top:0; border-radius:2px;
+    }
+    .gift::after {
+      content: ""; width: 80px; height: 10px; background: #f1c40f; position: absolute; top:35px; left:0; border-radius:2px;
+    }
+    @keyframes bounce {0%{transform:translateY(0);}100%{transform:translateY(-10px);}}
+
+    /* Red rose flowers */
+    .flowers { display:none; margin-top:20px; position: relative; width:200px; height:200px; }
+    .flower {
+      width: 25px; height: 25px; background: red; border-radius: 50%; position: absolute; bottom:0; left:50%;
+      transform: translateX(-50%) scale(0);
+      animation: bloom 2s forwards;
+    }
+    .flower::before {
+      content:"🌹"; font-size: 25px; position:absolute; top:-25px; left:-4px;
+    }
+    .flower:nth-child(2){animation-delay:0.3s; left:30%;}
+    .flower:nth-child(3){animation-delay:0.6s; left:70%;}
+    .flower:nth-child(4){animation-delay:0.9s; left:40%;}
+    .flower:nth-child(5){animation-delay:1.2s; left:60%;}
+
+    @keyframes bloom {0%{transform:translateY(0) scale(0);}100%{transform:translateY(-100px) scale(1);}}
+  </style>
+</head>
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Page 1 -->
+<div class="page bg active" id="page1">
+  <div class="card">
+    <h1>Habiba Kashmiri,<br>will you be my muse, my smile, and my forever inspiration? ✨</h1>
+    <button class="yes" onclick="startLove()">Yes ❤️</button>
+    <button class="no" id="noBtn">No 🙃</button>
+  </div>
+</div>
+
+<!-- Page 2 -->
+<div class="page bg" id="page2">
+  <div class="card">
+    <p>
+      Habiba, your beauty is not just in your face but in the glow of your heart.<br>
+      The way you speak, the things you care about, your laughter and gentle words —<br>
+      they make every moment magical.<br>
+      When I look at you, I see elegance, warmth, and the kindness that touches everyone.<br>
+      You are a star that lights my world brighter than words can say. 🌟
+    </p>
+    <button class="yes" onclick="nextPage(3)">Continue 💕</button>
+  </div>
+</div>
+
+<!-- Page 3 -->
+<div class="page bg" id="page3">
+  <div class="card">
+    <h1>
+      Habiba Kashmiri,<br>
+      your soul shines as brightly as your smile.<br>
+      You are a treasure, a gift, a red rose in every season of my life.<br>
+      Being with you feels like a dream I never want to end. 💖
+    </h1>
+    <div class="gift" onclick="showFlowers()"></div>
+    <div class="flowers" id="flowers">
+      <div class="flower"></div>
+      <div class="flower"></div>
+      <div class="flower"></div>
+      <div class="flower"></div>
+      <div class="flower"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const music = document.getElementById("bgMusic");
+  const noBtn = document.getElementById("noBtn");
+
+  music.volume = 0;
+
+  noBtn.addEventListener("mouseover", () => {
+    noBtn.style.left = Math.random() * 80 + "%";
+    noBtn.style.top = Math.random() * 80 + "%";
+  });
+
+  function startLove() {
+    fadeInMusic();
+    nextPage(2);
+  }
+
+  function fadeInMusic() {
+    music.play();
+    let vol = 0;
+    const fade = setInterval(()=>{
+      if(vol<0.5){vol+=0.01;music.volume=vol;} else{clearInterval(fade);}
+    },100);
+  }
+
+  function nextPage(num){
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+    document.getElementById("page"+num).classList.add("active");
+  }
+
+  function showFlowers(){
+    document.getElementById("flowers").style.display="block";
+  }
+</script>
+</body>
+</html>
